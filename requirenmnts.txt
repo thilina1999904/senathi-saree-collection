@@ -1,0 +1,11 @@
+1. Project Name: Senathi Saree Collection Web App 
+
+2. Technology Stack: MERN (MongoDB, Express, React, Node.js) 
+
+3. Key Modules:
+
+Authentication: User login & Admin login.
+Product Management: Add, Edit, Delete, View Sarees.
+Cart & Order: Adding to cart, Checkout, Order placement.
+Payment: Online (Card) or Manual (Bank Slip Upload).
+Admin Panel: Managing orders and stock.
