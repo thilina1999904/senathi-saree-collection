@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import userRouter from './routes/userRouter.js';
 import productRouter from './routes/productRouter.js';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 
 
@@ -31,7 +34,7 @@ app.use((req, res, next) => {
 });
 
 
-let mongoUrl = "mongodb+srv://admin:1234@cluster0.vurejbq.mongodb.net/main?appName=Cluster0"
+let mongoUrl = process.env.MONGO_URL
 
 mongoose.connect(mongoUrl)
 
