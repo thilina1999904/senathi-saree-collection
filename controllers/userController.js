@@ -1,6 +1,7 @@
 import User from "../models/user.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
 
 // Register User
 
@@ -44,7 +45,7 @@ export function LoginUser (req,res){
             email : user.email,
             role : user.role
 
-        },"senithi-secret-2026!",{ expiresIn: "1d" });
+        },process.env.JWT_SECRET,{ expiresIn: "1d" });
        
         res.json({
           message: "Login Successful",

@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     if (token != null) {
         token = token.replace("Bearer ", "");
 
-        jwt.verify(token, "senithi-secret-2026!", (err, decoded) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if (!err) {
                 req.user = decoded;
 
