@@ -5,6 +5,8 @@ import dotenv from 'dotenv'
 
 // Register User
 
+dotenv.config();
+
 export function RegisterUser(req, res) {
 
     const data = req.body;
