@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema({
     profilePicture : {
         type: String,
         required: true,
+        default: "https://img.freepik.com/premium-vector/account-icon-user-icon-vector-graphics_292645-552.jpg?semt=ais_wordcount_boost&w=740&q=80"
     }
 });
 

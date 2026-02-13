@@ -45,7 +45,8 @@ export function LoginUser (req,res){
             firstName : user.firstName,
             lastName : user.lastName,
             email : user.email,
-            role : user.role
+            role : user.role,
+            profilePicture: user.profilePicture
 
         },process.env.JWT_SECRET,{ expiresIn: "1d" });
        
@@ -58,6 +59,7 @@ export function LoginUser (req,res){
       }
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).json({ error: "Internal Server Error" });
     });
 }
