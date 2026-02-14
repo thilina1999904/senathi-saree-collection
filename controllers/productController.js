@@ -1,10 +1,10 @@
 import Product from "../models/product.js";
 
-export function AddProduct(req,res){
+export async function AddProduct(req, res) {
 
     console.log(req.user);
 
-    if(req.user == null){
+    if (req.user == null) {
         res.status(401).json({
             message: "Please Login and Try Again"
         })
@@ -12,7 +12,7 @@ export function AddProduct(req,res){
 
     }
 
-    if(req.user.role != "admin"){
+    if (req.user.role != "admin") {
         res.status(401).json({
             message: "You are not authorized to perform this action"
         })
@@ -20,7 +20,7 @@ export function AddProduct(req,res){
     }
 
 
-    if(req.user == null){
+    if (req.user == null) {
         res.status(401).json({
             message: "Please Login and Try Again"
         })
@@ -28,12 +28,18 @@ export function AddProduct(req,res){
 
     const data = req.body;
 
-    const newProduct = new Product (data);
+    const newProduct = new Product(data);
 
-    newProduct.save().then(() =>{
-        res.json({ message: "New Product Added successfully"})
-    })
-    .catch((error) =>{
-        res.status(500).json({ error: "Failed to add product" })
-    })
+    try {
+
+        await newProduct.save();
+        res.json({
+            message: "Product Registerd Successfully"
+        })
+    } catch (error) {
+        res.status(500).json({
+            error: "Product Registration Failed"
+        })
+
+    }
 }
