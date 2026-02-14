@@ -65,4 +65,15 @@ export function LoginUser (req,res){
 }
 
 
+export function isItAdmin(req){
+        let isAdmin = false;
+
+    if (req.user != null) {
+        if (req.user.role == "admin") {
+            isAdmin = true;
+        }
+    }
+    return isAdmin;
+}
+
 //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKYW5lYWRtaW4iLCJsYXN0TmFtZSI6IkRvZSIsImVtYWlsIjoiamFuZWFkbWluLmRvZUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3MDcyODY2N30.sMCRdipaYVU1ia3AuLKlxpoPLwAIxfRwi3B2bJ6La7Q//

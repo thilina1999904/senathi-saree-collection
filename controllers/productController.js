@@ -1,4 +1,5 @@
 import Product from "../models/product.js";
+import { isItAdmin } from "./userController.js";
 
 export async function AddProduct(req, res) {
 
@@ -34,7 +35,7 @@ export async function AddProduct(req, res) {
 
         await newProduct.save();
         res.json({
-            message: "Product Registerd Successfully"
+            message: "Product Added Successfully"
         })
     } catch (error) {
         res.status(500).json({
@@ -43,3 +44,73 @@ export async function AddProduct(req, res) {
 
     }
 }
+
+
+export async function getProduct(req, res) {
+    try {
+
+        if (isItAdmin(req)) {
+            const products = await Product.find();
+            res.json(products);
+            return;
+        } else {
+            const products = await Product.find({ availability: true });
+            res.json(products);
+            return;
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to get products"
+        })
+    }
+}
+
+
+export async function updateProduct(req,res){
+    try{
+        if(isItAdmin){
+            const key = req.params.key;
+
+            const data = req.body;
+
+            await Product.updateOne({key:key},data)
+
+        
+            res.json({
+                message: "Product Updated Successfully!"
+            })
+        }else{
+            res.status(403).json({
+                message:"You are not authorized perform this action"
+            })
+        }
+
+    }catch(error){
+        res.status(500).json({
+            message: "Failed to Update Product"
+        })
+    }
+}
+
+export async function deleteProduct(req,res){
+    try{
+        if(isItAdmin){
+            const key = req.params.key;
+            await Product.deleteOne({key:key})
+            res.json({
+                message:"Poduct Deleted Succssfully!"
+            })
+        }else{
+            res.status(403).json({
+                message: "You are not authorized perform this action"
+            })
+        }
+
+    }catch(e){
+        res.status(500).json({
+            message:"Failed to Delete Product!"
+        })
+    }
+}
+
